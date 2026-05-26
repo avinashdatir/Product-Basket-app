@@ -34,14 +34,14 @@ const Products = () => {
             className="flex justify-between items-center border-b border-gray-200 py-5"
           >
 
-            <p className="text-xl">
+            <p className="text-xl font-semibold">
               {product.name}
             </p>
 
-            <div className="flex items-center gap-5">
+            <div className="flex items-center gap-5 font-semibold">
 
               <p>
-                £ {product.price.toFixed(2)}
+                <span className="text-gray-400 font-semibold">£</span> {product.price.toFixed(2)}
               </p>
 
               <button
