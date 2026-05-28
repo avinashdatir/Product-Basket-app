@@ -1,17 +1,17 @@
-import { calculateItemSavings } from "../utils/offers";
+import type { BasketItem } from "../type/product";
 
 type SummaryProps = {
-  items: any[];
+  items: BasketItem[];
 };
 
 const Summary = ({ items }: SummaryProps) => {
-  const subtotal = items.reduce((total: number, item: any) => {
+  const subtotal = items.reduce((total: number, item: BasketItem) => {
     return total + item.price * item.quantity;
   }, 0);
 
   let totalSavings = 0;
 
-  const cheeseItem = items.find((item: any) => item.name === "Cheese");
+  const cheeseItem = items.find((item: BasketItem) => item.name === "Cheese");
 
   if (cheeseItem) {
     const freeCheese = Math.floor(cheeseItem.quantity / 2);
@@ -19,15 +19,15 @@ const Summary = ({ items }: SummaryProps) => {
     totalSavings += freeCheese * cheeseItem.price;
   }
 
-  const soupItem = items.find((item: any) => item.name === "Soup");
-  const breadItem = items.find((item: any) => item.name === "Bread");
+  const soupItem = items.find((item: BasketItem) => item.name === "Soup");
+  const breadItem = items.find((item: BasketItem) => item.name === "Bread");
 
   if (soupItem && breadItem) {
     const eligibleBread = Math.min(soupItem.quantity, breadItem.quantity);
 
     totalSavings += eligibleBread * (breadItem.price / 2);
   }
-  const butterItem = items.find((item: any) => item.name === "Butter");
+  const butterItem = items.find((item: BasketItem) => item.name === "Butter");
 
   if (butterItem) {
     totalSavings += butterItem.quantity * (butterItem.price / 3);

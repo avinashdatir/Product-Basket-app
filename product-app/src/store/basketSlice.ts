@@ -1,16 +1,22 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import type { Product } from "../type/product";
+import type { BasketItem } from "../type/product";
 
-const initialState: any = {
-  items:[],
+interface BasketState {
+  items: BasketItem[];
+}
+
+const initialState: BasketState = {
+  items: [],
 };
 
 const basketSlice = createSlice({
-  name:"basket",
+  name: "basket",
   initialState,
   reducers: {
-    addItem: (state, action: any) => {
+    addItem: (state, action: PayloadAction<Product>) => {
       const existingItem = state.items.find(
-        (item: any) => item.id === action.payload.id,
+        (item: BasketItem) => item.id === action.payload.id,
       );
 
       if (existingItem) {
@@ -23,23 +29,27 @@ const basketSlice = createSlice({
       }
     },
 
-    increaseQuantity: (state, action: any) => {
-      const item = state.items.find((item: any) => item.id === action.payload);
+    increaseQuantity: (state, action: PayloadAction<number>) => {
+      const item = state.items.find(
+        (item: BasketItem) => item.id === action.payload,
+      );
 
       if (item) {
         item.quantity += 1;
       }
     },
- 
-    decreaseQuantity: (state, action: any) => {
-      const item = state.items.find((item: any) => item.id === action.payload);
+
+    decreaseQuantity: (state, action: PayloadAction<number>) => {
+      const item = state.items.find(
+        (item: BasketItem) => item.id === action.payload,
+      );
 
       if (item) {
         if (item.quantity > 1) {
           item.quantity -= 1;
         } else {
           state.items = state.items.filter(
-            (item: any) => item.id !== action.payload,
+            (item: BasketItem) => item.id !== action.payload,
           );
         }
       }
