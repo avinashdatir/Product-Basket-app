@@ -1,15 +1,31 @@
 import { useDispatch, useSelector } from "react-redux";
-
 import { increaseQuantity, decreaseQuantity } from "../store/basketSlice";
-
-import { calculateItemSavings } from "../Utils/offers";
-
+import { calculateItemSavings } from "../utils/offers";
 import Summary from "./Summary";
+import EmptyCart from '../assets/pngtree-flat-gradient-ui-icon-for-an-empty-shopping-cart-vector-png-image_48327018.jpg'
 
 const Basket = () => {
   const dispatch: any = useDispatch();
-
   const items = useSelector((state: any) => state.basket.items);
+
+  if(items.length === 0){
+    return(
+      <div className="flex flex-col items-center justify-center h-[500px]">
+    
+    <img
+      src={EmptyCart}
+      alt="Empty Basket"
+      className="w-52 object-contain"
+    />
+
+    <p className="mt-4 text-2xl font-semibold text-gray-500">
+      Basket is Empty
+    </p>
+
+  </div>
+);
+
+  }
 
   return (
     <div>
@@ -19,9 +35,7 @@ const Basket = () => {
 
       {items.map((item: any, index: number) => {
         const savings = calculateItemSavings(item, items);
-
         const itemTotal = item.price * item.quantity;
-
         const finalItemCost = itemTotal - savings;
 
         return (

@@ -1,28 +1,23 @@
 import { useDispatch, useSelector } from "react-redux";
-
-import { products } from "../data/products";
-
+import { products } from "../data/products"
 import { addItem } from "../store/basketSlice";
 
 const Products = () => {
-
   const dispatch = useDispatch();
 
   const items = useSelector(
-    (state: any) => state.basket.items
+    (state: any) => state.basket.items 
   );
 
   return (
 
     <div>
-
       <h1 className="text-4xl font-semibold border-b border-gray-200 pb-2">
         Products
       </h1>
 
       {products.map((product) => {
 
-        // check item already added
         const isAdded = items.find(
           (item: any) => item.id === product.id
         );
