@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { increaseQuantity, decreaseQuantity } from "../store/basketSlice";
-import { calculateItemSavings } from "../utils/offers";
 import Summary from "./Summary";
 import type { AppDispatch, RootState } from "../store/store";
 import type { BasketItem } from "../type/product";
 import EmptyCart from "../assets/pngtree-flat-gradient-ui-icon-for-an-empty-shopping-cart-vector-png-image_48327018.jpg";
+import { calculateItemSavings } from "../utils/offers";
 
 const Basket = () => {
   const dispatch = useDispatch<AppDispatch>();
