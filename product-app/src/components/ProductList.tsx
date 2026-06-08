@@ -4,7 +4,7 @@ import { addItem } from "../store/basketSlice";
 import type { RootState } from "../store/store";
 import type { BasketItem } from "../type/product";
 
-const Products = () => {
+const ProductList = () => {
   const dispatch = useDispatch();
 
   const items = useSelector((state: RootState) => state.basket.items);
@@ -49,4 +49,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default ProductList;

@@ -3,7 +3,7 @@ import { increaseQuantity, decreaseQuantity } from "../store/basketSlice";
 import Summary from "./Summary";
 import type { AppDispatch, RootState } from "../store/store";
 import type { BasketItem } from "../type/product";
-import EmptyCart from "../assets/pngtree-flat-gradient-ui-icon-for-an-empty-shopping-cart-vector-png-image_48327018.jpg";
+import EmptyCart from "../assets/EmptyBasket.jpg";
 import { calculateItemSavings } from "../util/offers";
 
 const Basket = () => {
@@ -32,27 +32,22 @@ const Basket = () => {
         Basket
       </h1>
 
-      {items.map((item: BasketItem, index: number) => {
+      {items.map((item: BasketItem) => {
         const savings = calculateItemSavings(item, items);
         const itemTotal = item.price * item.quantity;
         const finalItemCost = itemTotal - savings;
 
         return (
-          <div key={index} className="border-b border-gray-300 py-6">
-            {/* TOP ROW */}
+          <div key={item.id} className="border-b border-gray-300 py-6">
             <div className="flex justify-between items-center">
-              {/* Product Name */}
               <p className="text-xl font-medium">{item.name}</p>
 
-              {/* Right Side */}
               <div className="flex items-center gap-40">
-                {/* Price */}
                 <p className="font-medium">
                   <span className="text-gray-400"> £</span>
                   {item.price.toFixed(2)}
                 </p>
 
-                {/* Quantity Buttons */}
                 <div className="flex items-center gap-4">
                   <button
                     onClick={() => dispatch(increaseQuantity(item.id))}
@@ -73,7 +68,6 @@ const Basket = () => {
               </div>
             </div>
 
-            {/* Item Price */}
             <div className="mt-4 text-right text-gray-500 border-b border-gray-300">
               <p className="text-lg">
                 Item price £{item.price.toFixed(2)}* {item.quantity}= £
@@ -81,7 +75,6 @@ const Basket = () => {
               </p>
             </div>
 
-            {/* Savings */}
             {savings > 0 && (
               <div className="mt-3 text-right border-b border-gray-300">
                 <p className="text-red-500 text-xl">
@@ -90,7 +83,6 @@ const Basket = () => {
               </div>
             )}
 
-            {/* Final Item Cost */}
             <div className="mt-3 text-right">
               <p className=" font-medium">
                 Item cost £{finalItemCost.toFixed(2)}
