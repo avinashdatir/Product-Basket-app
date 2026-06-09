@@ -11,7 +11,7 @@ const ProductList = () => {
 
   return (
     <div>
-      <h1 className="text-4xl font-semibold border-b border-gray-200 pb-2">
+      <h1 className="text-4xl font-semibold border-b border-gray-200">
         Products
       </h1>
 
